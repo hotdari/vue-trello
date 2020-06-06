@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../components/Home.vue'
+import Login from '../components/Login.vue'
+import NotFound from '../components/NotFound.vue'
 
 Vue.use(VueRouter)
-
-const Login = { name: 'Login', template: '<div> Login page </div>' }
-const NotFound = { name: 'NotFound', template: '<div> Page Not Found </div>' }
 
 const routes = [
   {
