@@ -1,0 +1,25 @@
+<template>
+  <div>
+    Card
+    <div>{{ cid }}</div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'card',
+  data () {
+    return {
+      cid: 0
+    }
+  },
+  watch: {
+    '$route' () {
+      this.cid = this.$route.params.cid
+    }
+  },
+  created () {
+    this.cid = this.$route.params.cid
+  }
+}
+</script>
