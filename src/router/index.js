@@ -8,11 +8,18 @@ import NotFound from '../components/NotFound.vue'
 
 Vue.use(VueRouter)
 
+const requireAuth = (to, form, next) => {
+  const isAuth = localStorage.getItem('token')
+  const loginPath = `/login?rPath=${encodeURIComponent(to.path)}`
+  isAuth ? next() : next(loginPath)
+}
+
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    beforeEnter: requireAuth
   },
   {
     path: '/login',
@@ -23,8 +30,9 @@ const routes = [
     path: '/b/:bid',
     name: 'Board',
     component: Board,
+    beforeEnter: requireAuth,
     children: [
-      { path: 'c/:cid', name: 'Card', component: Card }
+      { path: 'c/:cid', name: 'Card', beforeEnter: requireAuth, component: Card }
     ]
   },
   {
