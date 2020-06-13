@@ -20,13 +20,15 @@
 </template>
 
 <script>
+import { auth, setAuythInHeader } from '../api'
 export default {
   name: 'Login',
   data () {
     return {
       email: '',
       password: '',
-      error: ''
+      error: '',
+      rPath: ''
     }
   },
   computed: {
@@ -34,9 +36,19 @@ export default {
       return !this.email || !this.password
     }
   },
+  created () {
+    this.rPath = this.$route.query.rPath || '/'
+  },
   methods: {
     onSubmit () {
-      console.log(this.email, this.password)
+      auth.login(this.email, this.password)
+        .then(data => {
+          localStorage.setItem('token', data.accessToken)
+          setAuythInHeader(data.accessToken)
+          this.$router.push(this.rPath)
+        }).catch(err => {
+          this.error = err.data.error
+        })
     }
   }
 }
