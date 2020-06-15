@@ -24,6 +24,9 @@ export const setAuythInHeader = token => {
   axios.defaults.headers.common.Authorization = token ? `Bearer ${token}` : null
 }
 
+const { token } = localStorage
+if (token) setAuythInHeader(token)
+
 export const board = {
   fetch () {
     return request('get', '/boards')
