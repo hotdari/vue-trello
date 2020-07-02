@@ -37,11 +37,6 @@ export default {
 </script>
 
 <style>
-Edit in JSFiddle
-Result
-HTML
-JavaScript
-CSS
 .modal-mask {
   position: fixed;
   z-index: 9998;
