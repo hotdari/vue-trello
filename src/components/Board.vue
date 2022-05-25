@@ -1,26 +1,31 @@
 <template>
   <div>
-    Board
-    <div v-if="loading">loading board...</div>
-    <div v-else>
-      <div>{{ bid }}</div>
-      <div>
-        {{ board }}
+    <div class="board-wrapper">
+      <div class="board">
+        <div class="board-header">
+          <span class="board-title">{{ board.title }}</span>
+        </div>
+        <div class="list-section-wrapper">
+          <div class="list-section">
+            <div class="list-wrapper" v-for="list in board.lists" :key="list.pos">
+              <List :data="list" />
+            </div>
+          </div>
+        </div>
       </div>
-      <ul>
-        <li><router-link :to="`/b/${bid}/c/1`">Card 1</router-link></li>
-        <li><router-link :to="`/b/${bid}/c/2`">Card 2</router-link></li>
-      </ul>
     </div>
-    <hr />
-    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import List from './List'
 
 export default {
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    List
+  },
   data () {
     return {
       bid: 0,
