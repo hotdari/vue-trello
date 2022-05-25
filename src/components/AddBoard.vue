@@ -47,14 +47,12 @@ export default {
       'SET_IS_ADD_BOARD'
     ]),
     ...mapActions([
-      'ADD_BOARD',
-      'FETCH_BOARDS'
+      'ADD_BOARD'
     ]),
     addBoard () {
       this.SET_IS_ADD_BOARD(false)
-      this.ADD_BOARD({ title: this.input }).then(() => {
-        this.FETCH_BOARDS()
-      })
+      this.ADD_BOARD({ title: this.input })
+        .then(({ id }) => this.$router.push(`/b/${id}`))
     }
   }
 
