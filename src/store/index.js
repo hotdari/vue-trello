@@ -1,23 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as api from '../api'
+import state from '@/store/state'
+import getters from '@/store/getters'
+import mutations from '@/store/mutations'
+import actions from '@/store/actions'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
-    isAddBoard: false
-  },
-  mutations: {
-    SET_IS_ADD_BOARD (state, toggle) {
-      state.isAddBoard = toggle
-    }
-  },
-  actions: {
-    ADD_BOARD (_, { title }) {
-      return api.board.create(title)
-    }
-  },
-  modules: {
-  }
+const store = new Vuex.Store({
+  state: state,
+  getters: getters,
+  mutations: mutations,
+  actions: actions
 })
+
+const { token } = localStorage
+store.commit('LOGIN', token)
+
+export default store
