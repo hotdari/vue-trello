@@ -10,6 +10,9 @@ const mutations = {
   SET_BOARD (state, board) {
     state.board = board
   },
+  SET_CARD (state, card) {
+    state.card = card
+  },
   LOGIN (state, token) {
     if (!token) return
     state.token = token
@@ -20,6 +23,10 @@ const mutations = {
     state.token = null
     delete localStorage.token
     setAuythInHeader(null)
+  },
+  SET_THEME (state, color) {
+    state.bodyColor = color || '#ffffff'
+    state.navbarColor = color ? 'rgba(0,0,0,.15)' : '#026aa7'
   }
 }
 
